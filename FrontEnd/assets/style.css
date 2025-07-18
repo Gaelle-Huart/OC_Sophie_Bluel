@@ -191,15 +191,35 @@ header {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * section portfolio * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .portfolio {
 	max-width: 950px;
-	text-align: center;
 	margin: 0 auto 1em auto;
 }
 .portfolio_title {
+	display: flex;
+	gap: 30px;
+	justify-content: center;
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154;
 }
+.modify_icon {
+	display: flex;
+	font-size: 15px;
+	padding-bottom: 2px;
+}
+.modify {
+	font-family: 'Work Sans';
+	display: flex;
+	gap: 10px;
+	align-items: end;
+	background-color: transparent;
+	border: transparent;
+	font-size: 14px;
+	padding-bottom: 2px;
+	display: none;
+	margin-left: 30px;
+}
+
 
 /* * * * * * * * * * * * * * div filter * * * * * * * * * * * * * */
 .filter {
@@ -209,30 +229,20 @@ header {
 	gap: 10px;
 	margin: 55px auto 50px auto;
 }
-.filter_btn {
+.all {
 	height: 37px;
 	font-family: 'Syne';
 	font-size: 16px;
+	cursor: pointer;
 	border-radius: 60px;
 	color: #1D6154;
 	border: 1px solid #1D6154;
 	background-color: transparent;
+	padding: 10px 28.4px;
 }
-.filter_btn_selected {
+.selected {
 	background-color: #1D6154;
 	color: #fffef8;
-}
-.btn_all {
-	width: 100px;
-}
-.btn_obj {
-	width: 100px;
-}
-.btn_apa {
-	width: 157px;
-}
-.btn_hor {
-	width: 198px;
 }
 
 /* * * * * * * * * * * * * * div gallery * * * * * * * * * * * * * */
@@ -243,10 +253,8 @@ header {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
 .gallery img {
 	width: 100%;
-
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * section contact * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -255,10 +263,6 @@ header {
 	margin: auto;
 	margin-top: 60px;
 }
-/* #contact > * {
-	text-align: center;
-
-} */
 .contact_title {
 	font-family: 'Syne';
 	font-weight: 700;
@@ -271,13 +275,13 @@ header {
 	text-align: center;
 	font-size: 16px;
 }
+
 .form {
 	text-align: left;
 	margin-top: 5px;
 	display: flex;
 	flex-direction: column;
 }
-
 .form_input {
 	height: 50px;
 	font-size: 14px;
@@ -294,7 +298,6 @@ header {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	font-size: 14px;
 }
-
 .form_submit {
 	font-family: 'Syne';
 	font-size: 14px;
@@ -306,6 +309,10 @@ header {
 	text-align: center;
 	border-radius: 60px;
 	border: none;
+	cursor: pointer;
+}
+.form_submit:hover {
+	background-color: #0E2F28;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * section footer * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -315,13 +322,11 @@ header {
 	background: white;
 	align-content: center;
 }
-
 .foot-nav_ul {
 	display: flex;
 	justify-content: flex-end;
 	margin-right: 100px;
 }
-
 .foot-nav_ul_li {
 	font-size: 14px;
 	font-weight: 300;
@@ -374,6 +379,10 @@ header_log {
 	text-align: center;
 	border-radius: 60px;
 	border: none;
+	cursor: pointer;
+}
+.login_form_submit:hover {
+	background-color: #0E2F28;
 }
 .log_selected {
 	font-weight: bold;

@@ -4,16 +4,20 @@
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- -- -- -- -- -- -- Google Fonts -- -- -- -- -- -- -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<!-- -- -- -- -- -- -- FontAwesome -- -- -- -- -- -- -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="./assets/style.css">
+	<!-- -- -- -- -- -- -- scripts JavaScript -- -- -- -- -- -- -->
+	<script type="module" src="assets/script/index.js" defer></script>
 </head>
 
 <body>
-
+	<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- topband du mode édition -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 	<aside class="edit_topband">
 		<i class="fa-regular fa-pen-to-square edit_topband_icon"></i>
 		<p class="edit_topband_text">Mode édition</p>
@@ -33,6 +37,7 @@
 	</header>
 
 	<main>
+		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section introduction -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 		<section id="introduction" class="intro">
 			<figure class="portrait">
 				<img class="portrait_img" src="./assets/images/sophie-bluel.png" alt="Portrait de Sophie Bluel">
@@ -45,62 +50,23 @@
 			</article>
 		</section>
 
+		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section portfolio -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 		<section id="portfolio" class="portfolio">
-
-			<h2 class="portfolio_title">Mes projets</h2>
+			<h2 class="portfolio_title">Mes projets
+			<button class="modify"><i class="modify_icon fa-regular fa-pen-to-square"></i>modifier</button>
+			</h2>
 			<div class="filter">
-				<button class="filter_btn btn_all active_btn">Tous</button>
-				<button class="filter_btn btn_obj">Objets</button>
+				<button class="all selected">Tous</button>
+				<!-- <button class="filter_btn btn_obj">Objets</button>
 				<button class="filter_btn btn_apa">Appartements</button>
-				<button class="filter_btn btn_hor">Hôtels & restaurants</button>
+				<button class="filter_btn btn_hor">Hotels & restaurants</button> -->
 			</div>
 			<div class="gallery">
-				<figure>
-					<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-					<figcaption>Abajour Tahina</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-					<figcaption>Appartement Paris V</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-					<figcaption>Restaurant Sushisen - Londres</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-					<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-					<figcaption>Structures Thermopolis</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-					<figcaption>Appartement Paris X</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-					<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-					<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-					<figcaption>Appartement Paris XVIII</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-					<figcaption>Bar “Lullaby” - Paris</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-					<figcaption>Hotel First Arte - New Delhi</figcaption>
-				</figure>
+				<!-- -- -- -- -- -- contenu généré par index.js -- -- -- -- -- -->
 			</div>
 		</section>
+
+		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section contact -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 		<section id="contact" class="contact">
 			<h2 class="contact_title">Contact</h2>
 			<p class="contact_text">Vous avez un projet ? Discutons-en !</p>
