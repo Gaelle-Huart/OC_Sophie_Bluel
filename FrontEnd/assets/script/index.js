@@ -3,46 +3,72 @@
 /// ///// ////
 
 ///// ///// //// //// /// /// // // // Récupération des projets // // // /// /// //// //// //// ///// /////
-
-async function fetchProjets(filtre) {
-  const URL = "http://localhost:5678/api/works";
+async function fetchWorks(filter) {
+  document.querySelector(".gallery").innerHTML = "";
   try {   
-    const response = await fetch(URL);
+    const response = await fetch("http://localhost:5678/api/works");
     if(!response.ok) {
-      throw new Error(`Response status: ${response.status}`)
+      throw new Error(`Response status: ${response.status}`);
     }
-    const projets = await response.json();                                                      
-    const projetsFilter = filtre ? projets.filter((info) => info.categoryId === filtre) : projets;
 
-    projetsFilter.forEach(projets => {
-      getWorks(projets);
+    const works = await response.json();
+    const filtering = filter ? works.filter((data) => data.categoryId === filter) : works; // (=>) = fonction anonyme
+    filtering.forEach(sujet => {
+      setWorks(sujet);
     });
+    
   } catch (erreur) {
     console.log("Erreur :", erreur);
   }
 }
-fetchProjets();                                                                                              // appel de la fonction
+fetchWorks(); // appel de fonction
 
-// // erreur dans la console (problème d'id) ==> trouver d'où elle vient ; la fonction marche quand même // //
-function getWorks(works) {                                                                                  // récupération des infos
-  const projet = document.createElement("figure");                                                        // ajout figure + description
-  projet.dataset.identifiant = `projet-${works.id}`;
-  projet.innerHTML = `
-    <img src=${works.imageUrl} alt=${works.title}>
-    <figcaption>${works.title}</figcaption>
-  `;
-  document.querySelector(".gallery").appendChild(projet);                                               // ajoute figure en fin de gallery
+function setWorks(data) { 
+  const project = document.createElement("figure");
+  project.innerHTML = `<img src=${data.imageUrl} alt=${data.title}>
+  <figcaption>${data.title}</figcaption>`;
+  document.querySelector(".gallery").appendChild(project);
 }
-getWorks();                                                                                                // affichage des projets (f5)
 
 ///// ///// //// //// /// /// // // // Récupération des catégories // // // // /// /// //// //// ///// /////
+async function fetchCategories() {
+  try {
+    const response = await fetch("http://localhost:5678/api/categories");
+    if(!response.ok) {
+      throw new Error(`Response status: ${response.status}`)
+    }
+    const categories = await response.json();
+    for (let i = 0 ; i < categories.length ; i++) {
+      setFilter(categories[i]);
+    }
+  } catch (erreur){
+    console.log("Erreur :", erreur);
+  }
+}
+fetchCategories();
 
 
+///// ///// //// //// /// /// // // // Gestion des boutons filtre // // // // /// /// //// //// ///// /////
+function setFilter(data) {
+  const bouton = document.createElement("button");
+  bouton.innerHTML = `${data.name}`;
+  bouton.classList.add('filter_btn');
+  bouton.addEventListener("click", () => fetchWorks(data.id)); // et pas categoryId ! envoie à fetchWorks
+  bouton.addEventListener("click", (event) => switchFilter(event));
+  document.querySelector(".all").addEventListener("click", (event) => switchFilter(event)); // fait en sorte que "tous" switch
+  document.querySelector(".filter").append(bouton);
+}
 
-///// ///// //// //// /// /// // // // Affichage des boutons filtre // // // // /// /// //// //// ///// /////
-
-
+function switchFilter(event) {
+  const filtre = document.querySelector(".filter");
+  Array.from(filtre.children).forEach((btn) =>
+    btn.classList.remove("selected")
+  );
+  event.target.classList.add("selected");
+}
 
 ///// ///// //// //// /// /// // // // Gestion de la modale // // // /// /// //// //// //// //// ///// /////
 
 
+///// ///// //// //// /// /// // // // Gestion du bouton "tous" // // // /// /// //// //// //// //// ///// /////
+document.querySelector(".all").addEventListener("click", () => fetchWorks());
