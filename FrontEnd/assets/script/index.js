@@ -3,7 +3,7 @@
 /// ///// ////
 
 ///// ///// //// //// /// /// // // // Récupération des projets // // // /// /// //// //// //// ///// /////
-async function fetchWorks(filter) {
+async function fetchWorks(filter = null) {
   document.querySelector(".gallery").innerHTML = "";
   try {   
     const response = await fetch("http://localhost:5678/api/works");
@@ -14,19 +14,19 @@ async function fetchWorks(filter) {
     const works = await response.json();
     const filtering = filter ? works.filter((data) => data.categoryId === filter) : works; // (=>) = fonction anonyme
     filtering.forEach(sujet => {
-      setWorks(sujet);
+      addWork(sujet.imageUrl, sujet.title);
     });
     
   } catch (erreur) {
     console.log("Erreur :", erreur);
   }
 }
-fetchWorks(); // appel de fonction
+await fetchWorks(null); // appel de fonction asynchrone
 
-function setWorks(data) { 
+function addWork(imageUrl, title) {
   const project = document.createElement("figure");
-  project.innerHTML = `<img src=${data.imageUrl} alt=${data.title}>
-  <figcaption>${data.title}</figcaption>`;
+  project.innerHTML = `<img src="${imageUrl}" alt="${title}">
+  <figcaption>${title}</figcaption>`;
   document.querySelector(".gallery").appendChild(project);
 }
 
@@ -39,21 +39,21 @@ async function fetchCategories() {
     }
     const categories = await response.json();
     for (let i = 0 ; i < categories.length ; i++) {
-      setFilter(categories[i]);
+      createFilterButton(categories[i], categories[i]);
     }
   } catch (erreur){
     console.log("Erreur :", erreur);
   }
 }
-fetchCategories();
+await fetchCategories();
 
 
 ///// ///// //// //// /// /// // // // Gestion des boutons filtre // // // // /// /// //// //// ///// /////
-function setFilter(data) {
+function createFilterButton({name, id}) {
   const bouton = document.createElement("button");
-  bouton.innerHTML = `${data.name}`;
+  bouton.innerHTML = `${name}`;
   bouton.classList.add('filter_btn');
-  bouton.addEventListener("click", () => fetchWorks(data.id)); // et pas categoryId ! envoie à fetchWorks
+  bouton.addEventListener("click", () => fetchWorks(id)); // et pas categoryId ! envoie à fetchWorks
   bouton.addEventListener("click", (event) => switchFilter(event));
   document.querySelector(".all").addEventListener("click", (event) => switchFilter(event)); // fait en sorte que "tous" switch
   document.querySelector(".filter").append(bouton);
@@ -61,8 +61,8 @@ function setFilter(data) {
 
 function switchFilter(event) {
   const filtre = document.querySelector(".filter");
-  Array.from(filtre.children).forEach((btn) =>
-    btn.classList.remove("selected")
+  Array.from(filtre.children).forEach((filter_btn) =>
+    filter_btn.classList.remove("selected")
   );
   event.target.classList.add("selected");
 }
