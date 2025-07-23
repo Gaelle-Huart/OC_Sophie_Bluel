@@ -57,6 +57,10 @@ body {
 	font-size: 14px;
 }
 
+.hidden {
+	display: none !important; /* <= pratique pour ce cas précis */
+}
+
 /* * * * * * * * * * * * * * aside edit mode * * * * * * * * * * * * * */
 .edit_topband {
 	width: 100%;
@@ -69,7 +73,6 @@ body {
 	background-color: black;
 	position: fixed;
 	top: 0;
-	display: none;
 }
 .edit_topband_icon {
 	font-size: 15px;
@@ -122,19 +125,18 @@ header {
 	font-size: 16px;
 	
 }
-.navig_in {
+.navig-in {
 	padding: 0 21px;
 	font-size: 16px;
 	margin: 0 7px;
 	
 }
-.navig_out {
+/* .navig_out {
 	padding: 0 21px;
-	font-size: 16px;
-	
+	font-size: 16px;       (à supprimer si la gestion du logout est gérée par JavaScript)
 	display: none;
-}
-.navig_insta {
+} */
+.navig-insta {
 	padding-left: 25px;
 }
 .insta {
@@ -145,14 +147,14 @@ header {
 	font-weight: bold;
 	cursor: pointer;
 }
-.navig_in:hover {
+.navig-in:hover {
 	font-weight: bold;
 	cursor: pointer;
 }
-.navig_out:hover {
-	font-weight: bold;
+/* .navig_out:hover {
+	font-weight: bold;      (à supprimer si la gestion du logout est gérée par JavaScript)
 	cursor: pointer;
-}
+} */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * section introduction * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .intro {
@@ -201,6 +203,7 @@ header {
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154;
+	margin-bottom: 55px;
 }
 .modify_icon {
 	display: flex;
@@ -216,7 +219,6 @@ header {
 	border: transparent;
 	font-size: 14px;
 	padding-bottom: 2px;
-	display: none;
 	margin-left: 30px;
 }
 
@@ -227,7 +229,6 @@ header {
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
-	margin: 55px auto 50px auto;
 }
 .filter_btn {
 	height: 37px;
@@ -257,6 +258,7 @@ header {
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
+	margin-top: 50px;
 }
 .gallery img {
 	width: 100%;
@@ -264,7 +266,7 @@ header {
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * section contact * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .contact {
-	width: 27%;
+	max-width: 379px;
 	margin: auto;
 	margin-top: 60px;
 }

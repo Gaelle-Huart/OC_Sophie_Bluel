@@ -67,8 +67,17 @@ function switchFilter(event) {
   event.target.classList.add("selected");
 }
 
-///// ///// //// //// /// /// // // // Gestion de la modale // // // /// /// //// //// //// //// ///// /////
+///// ///// //// //// /// /// // // // Gestion "login" et "logout" // // // /// /// //// //// //// //// ///// /////
+if(sessionStorage.loginToken) {
+  document.querySelector(".navig-in").innerText = "logout";
+}
 
+document.querySelector(".navig-in").addEventListener("click", function () {
+  if (sessionStorage.getItem("loginToken")) {
+    sessionStorage.removeItem("loginToken");
+    window.location.reload();
+  }
+});
 
 ///// ///// //// //// /// /// // // // Gestion du bouton "tous" // // // /// /// //// //// //// //// ///// /////
 document.querySelector(".all").addEventListener("click", () => fetchWorks());

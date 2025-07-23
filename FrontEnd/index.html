@@ -13,16 +13,17 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="./assets/style.css">
 	<!-- -- -- -- -- -- -- scripts JavaScript -- -- -- -- -- -- -->
-	<script type="module" src="assets/script/index.js" defer></script>
+	<script type="module" src="./assets/script/index.js" defer></script>
 </head>
 
 <body>
-	<dialog></dialog>
 	<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- topband du mode édition -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
-	<aside class="edit_topband">
-		<i class="fa-regular fa-pen-to-square edit_topband_icon" aria-hidden="false"></i>
+	<aside class="edit_topband hidden">
+		<i class="fa-regular fa-pen-to-square edit_topband_icon" aria-hidden="true"></i>
 		<p class="edit_topband_text">Mode édition</p>
 	</aside>
+	<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- gestion de la modale -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+	<dialog class="modal"></dialog>
 
 	<header>
 		<a class="link" href="./index.html"><h1 class="logo">Sophie Bluel<span class="job">Architecte d'intérieur</span></h1></a>
@@ -30,9 +31,9 @@
 			<ul class="navigation">
 				<li class="navig"><a class="link" href="#portfolio">projets</a></li>
 				<li class="navig"><a class="link" href="#contact">contact</a></li>
-				<li class="navig_in"><a class="link" href="./login.html">login</a></li>
-				<li class="navig_out"><a class="link" href="./index.html">logout</a></li>
-				<li class="navig_insta"><i class="fa-brands fa-instagram insta"></i></li>
+				<li class="navig-in"><a class="link" href="./login.html">login</a></li>
+				<!-- <li class="navig_out"><a class="link" href="./index.html">logout</a></li> --> <!-- pas besoin, gérer avec innerHTML -->
+				<li class="navig-insta"><i class="fa-brands fa-instagram insta"></i></li>
 			</ul>
 		</nav>
 	</header>
@@ -54,7 +55,7 @@
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section portfolio -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 		<section id="portfolio" class="portfolio">
 			<h2 class="portfolio_title">Mes projets
-			<button class="modify"><i class="modify_icon fa-regular fa-pen-to-square" aria-hidden="false"></i>modifier</button>
+				<button class="modify hidden"><i class="modify_icon fa-regular fa-pen-to-square" aria-hidden="true"></i>modifier</button>
 			</h2>
 			<div class="filter">
 				<button class="all filter_btn selected">Tous</button>
