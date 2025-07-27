@@ -13,8 +13,8 @@ async function fetchWorks(filter = null) {
 
     const works = await response.json();
     const filtering = filter ? works.filter((data) => data.categoryId === filter) : works; // (=>) = fonction anonyme
-    filtering.forEach(sujet => {
-      addWork(sujet.imageUrl, sujet.title);
+    filtering.forEach(the => {
+      addWork(the.imageUrl, the.title);
     });
     
   } catch (erreur) {
@@ -60,20 +60,31 @@ function createFilterButton({name, id}) {
 }
 
 function switchFilter(event) {
-  const filtre = document.querySelector(".filter");
-  Array.from(filtre.children).forEach((filter_btn) =>
+  const filter = document.querySelector(".filter");
+  Array.from(filter.children).forEach((filter_btn) =>
     filter_btn.classList.remove("selected")
   );
   event.target.classList.add("selected");
 }
 
 ///// ///// //// //// /// /// // // // Gestion "login" et "logout" // // // /// /// //// //// //// //// ///// /////
-if(sessionStorage.loginToken) {
-  document.querySelector(".navig-in").innerText = "logout";
+function loggedIn() {
+  if(sessionStorage.loginToken) {
+    const topband = document.querySelector(".edit_topband");
+    topband.classList.remove("hidden");
+    document.querySelector("body").style.marginTop = '59px';
+    document.querySelector(".navig-in").innerText = "logout";
+    const modify = document.querySelector(".modify");
+    modify.classList.remove("hidden");
+    const filter = document.querySelector(".filter");
+    filter.classList.add("hidden");
+  }
 }
 
-document.querySelector(".navig-in").addEventListener("click", function () {
-  if (sessionStorage.getItem("loginToken")) {
+loggedIn();
+
+document.querySelector(".navig-in").addEventListener("click", function logout () {
+  if (sessionStorage.loginToken) {
     sessionStorage.removeItem("loginToken");
     window.location.reload();
   }

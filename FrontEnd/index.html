@@ -18,13 +18,12 @@
 
 <body>
 	<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- topband du mode édition -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
-	<aside class="edit_topband hidden">
-		<i class="fa-regular fa-pen-to-square edit_topband_icon" aria-hidden="true"></i>
+	<aside class="edit_topband hidden" aria-hidden="true">
+		<i class="fa-regular fa-pen-to-square edit_topband_icon"></i>
 		<p class="edit_topband_text">Mode édition</p>
 	</aside>
-	<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- gestion de la modale -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
-	<dialog class="modal"></dialog>
-
+	
+	<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section du header -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 	<header>
 		<a class="link" href="./index.html"><h1 class="logo">Sophie Bluel<span class="job">Architecte d'intérieur</span></h1></a>
 		<nav>
@@ -55,7 +54,7 @@
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section portfolio -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 		<section id="portfolio" class="portfolio">
 			<h2 class="portfolio_title">Mes projets
-				<button class="modify hidden"><i class="modify_icon fa-regular fa-pen-to-square" aria-hidden="true"></i>modifier</button>
+				<a class="modify hidden" href="#modalGallery"><i class="modify_icon fa-regular fa-pen-to-square" aria-hidden="true"></i>modifier</a>
 			</h2>
 			<div class="filter">
 				<button class="all filter_btn selected">Tous</button>
@@ -64,6 +63,52 @@
 				<!-- -- -- -- -- -- contenu généré par index.js -- -- -- -- -- -->
 			</div>
 		</section>
+
+		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section des modales -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- Galerie photo -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+		<dialog id="modalGallery" class="modal_wrapper hidden" closedby="any" aria-hidden="true" aria-label="Modification de la galerie photo">
+			<div class="modal">
+				<button class="modalGallery_close" aria-label="Fermer la modale">
+					<i class="fa-solid fa-xmark cross"></i>
+				</button>
+				<h3 class="modalGallery_title">Galerie photo</h3>
+				<div class="modalGallery_gallery">
+					<!-- -- -- -- -- -- contenu généré par modal.js -- -- -- -- -- -->
+				</div>
+				<hr class="modalGallery_line"/>
+				<button class="modalGallery_btn">Ajouter une photo</button>
+			</div>
+		</dialog>
+
+		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- Ajout photo -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+		<dialog id="modalAdd" class="modal_wrapper" closedby="any" aria-hidden="true" aria-label="Ajouter/supprimer une photo">
+			<div class="modal">
+				<div class="modalAdd_topIcons">
+					<button class="topIcons_back" aria-label="Précédent">
+						<i class="fa-solid fa-arrow-left back"></i>
+					</button>
+					<button class="topIcons_cross" aria-label="Fermer la modale">
+						<i class="fa-solid fa-xmark cross"></i>
+					</button>
+				</div>
+				<h3 class="modalAdd_title">Ajout photo</h3>
+				<form action="#" method="post" class="modalAdd_form">
+					<div id="modalAdd_photo">
+						<i class="fa-regular fa-image imageIcon" aria-hidden="true"></i>
+						<label class="photo_label" for="file">+ Ajouter photo</label>
+						<p class="photo_info">jpg, png : 4mo max</p>
+						<input class="photo_input" type="file" name="image" id="file" accept="image/jpg, image/png" required>
+						<img id="photo_preview" src="#" alt="Aperçu de l'image">
+					</div>
+					<label class="form_label" for="title">Titre</label>
+					<input class="form_input" type="file" name="title" id="title" required>
+					<label class="form_label" for="selectCategory">Catégorie</label>				
+					<select class="selectCategory" name="Category" required></select>
+					<hr/>
+					<button type="submit" id="addWorkButton" disabled>Valider</button>
+				</form>
+			</div>
+		</dialog>
 
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section contact -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 		<section id="contact" class="contact">

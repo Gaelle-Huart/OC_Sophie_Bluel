@@ -61,7 +61,7 @@ body {
 	display: none !important; /* <= pratique pour ce cas précis */
 }
 
-/* * * * * * * * * * * * * * aside edit mode * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * aside top band * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .edit_topband {
 	width: 100%;
 	height: 59px;
@@ -83,11 +83,13 @@ body {
 	margin-top: 2px;
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * section du header * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 header {
 	max-width: 1140px;
 	display: flex;
 	justify-content: space-between;
-	margin: 50px auto 50px auto;
+	margin: 0 auto;
+	padding: 50px 0;
 }
 
 .link {
@@ -131,11 +133,6 @@ header {
 	margin: 0 7px;
 	
 }
-/* .navig_out {
-	padding: 0 21px;
-	font-size: 16px;       (à supprimer si la gestion du logout est gérée par JavaScript)
-	display: none;
-} */
 .navig-insta {
 	padding-left: 25px;
 }
@@ -151,10 +148,6 @@ header {
 	font-weight: bold;
 	cursor: pointer;
 }
-/* .navig_out:hover {
-	font-weight: bold;      (à supprimer si la gestion du logout est gérée par JavaScript)
-	cursor: pointer;
-} */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * section introduction * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .intro {
@@ -214,12 +207,13 @@ header {
 	font-family: 'Work Sans';
 	display: flex;
 	gap: 10px;
+	cursor: pointer;
 	align-items: end;
-	background-color: transparent;
-	border: transparent;
 	font-size: 14px;
+	font-weight: 500;
+	color: black;
 	padding-bottom: 2px;
-	margin-left: 30px;
+	text-decoration: none;
 }
 
 
@@ -258,10 +252,195 @@ header {
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
-	margin-top: 50px;
+	padding-top: 50px;
 }
 .gallery img {
 	width: 100%;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * boîte dialog Galerie * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.modal_wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	padding: 0;
+}
+
+.modal {
+	display: flex;
+	flex-direction: column;
+	width: 580px;
+	height: fit-content;
+	background-color: white;
+	border-radius: 10px;
+	padding: 25px;
+}
+
+.modalGallery_close {
+	align-self: end;
+	width: 24px;
+	height: 24px;
+	background-color: white;
+	border: none;
+	cursor: pointer;
+	margin-right: 5px;
+}
+
+.cross {
+	font-size: 20px;
+}
+
+.modalGallery_title {
+	font-size: 26px;
+	font-weight: 400;
+	align-self: center;
+	padding-top: 15px;
+}
+
+.modalGallery_gallery {
+	align-self: center;
+	width: 420px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 9px;
+	grid-row-gap: 28px;
+	padding: 50px 0;
+}
+.modalGallery_gallery figure {
+	position: relative;
+}
+.modalGallery_gallery img {
+	width: 100%;
+}
+
+.modalGallery_line {
+	align-self: center;
+	width: 420px;
+	background-color: #B3B3B3;
+	margin: 10px 0;
+}
+
+.modalGallery_btn {
+	align-self: center;
+	width: 237px;
+	height: 37px;
+	font-family: 'Syne';
+	font-size: 14px;
+	cursor: pointer;
+	border-radius: 60px;
+	color: white;
+	justify-content: center;
+	background-color: #1D6154;
+	border: none;
+	margin: 25px 0px 17px 0px;
+}
+.modalGallery_btn:hover {
+	background-color: #0E2F28;
+}
+
+.trashCan_btn {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 17px;
+	height: 17px;
+	cursor: pointer;
+	background-color: black;
+	border-radius: 3px;
+	border: none;
+}
+.trashCan_btn i {
+	font-size: 10px;
+	color: white;
+	margin-top: 1px;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * boîte dialog Ajout * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.modalAdd_topIcons {
+	display: flex;
+	justify-content: space-between;
+}
+.topIcons_back {
+	width: 24px;
+	height: 24px;
+	background-color: white;
+	border: none;
+	cursor: pointer;
+}
+.topIcons_cross {
+	width: 24px;
+	height: 24px;
+	background-color: white;
+	border: none;
+	cursor: pointer;
+	margin-right: 5px;
+}
+.back {
+	font-size: 20px;
+}
+
+.modalAdd_title {
+	font-size: 26px;
+	font-weight: 400;
+	align-self: center;
+	padding-top: 15px;
+}
+
+.modalAdd_form {
+	display: flex;
+	flex-direction: column;
+}
+#modalAdd_photo {
+	width: 420px;
+	height: 169px;
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	background-color: #E8F1F6;
+	margin-top: 30px;
+	border-radius: 3px;
+}
+.imageIcon {
+	color: #B9C5CC;
+	font-size: 68px;
+	align-self: center;
+	padding: 15px 0 10px 0;
+}
+.photo_label {
+	display: flex;
+	width: 173px;
+	height: 36px;
+	font-size: 14px;
+	font-weight: 600;
+	align-items: center;
+	justify-content: center;
+	line-height: 100%;
+	background-color: #CBD6DC;
+	color: #306685;
+	align-self: center;
+	border-radius: 60px;
+	cursor: pointer;
+}
+.photo_info {
+	font-size: 10px;
+	align-self: center;
+	margin-top: 10px;
+}
+.photo_input {
+	height: 20px;
+	opacity: 0;
+}
+#photo_preview {
+	display: none;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * section contact * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
