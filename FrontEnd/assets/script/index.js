@@ -5,6 +5,7 @@
 ///// ///// //// //// /// /// // // // Récupération des projets // // // /// /// //// //// //// ///// /////
 async function fetchWorks(filter = null) {
   document.querySelector(".gallery").innerHTML = "";
+  document.querySelector(".modalGallery_gallery").innerHTML = "";
   try {   
     const response = await fetch("http://localhost:5678/api/works");
     if(!response.ok) {
@@ -14,7 +15,8 @@ async function fetchWorks(filter = null) {
     const works = await response.json();
     const filtering = filter ? works.filter((data) => data.categoryId === filter) : works; // (=>) = fonction anonyme
     filtering.forEach(the => {
-      addWork(the.imageUrl, the.title);
+      createFigure(the.imageUrl, the.title);
+      createModalFigure(the.imageUrl);
     });
     
   } catch (erreur) {
@@ -23,11 +25,19 @@ async function fetchWorks(filter = null) {
 }
 await fetchWorks(null); // appel de fonction asynchrone
 
-function addWork(imageUrl, title) {
+function createFigure(imageUrl, title) {
   const project = document.createElement("figure");
   project.innerHTML = `<img src="${imageUrl}" alt="${title}">
-  <figcaption>${title}</figcaption>`;
+    <figcaption>${title}</figcaption>`;
   document.querySelector(".gallery").appendChild(project);
+}
+function createModalFigure(imageUrl, title, id) {
+  const project = document.createElement("figure");
+  project.innerHTML = `<img src="${imageUrl}" alt="${title}">
+    <button class="trashCan_btn">
+      <i id="${id}" class="fa-solid fa-trash-can"></i>
+    </button>`;
+  document.querySelector(".modalGallery_gallery").appendChild(project);
 }
 
 ///// ///// //// //// /// /// // // // Récupération des catégories // // // // /// /// //// //// ///// /////
@@ -52,7 +62,7 @@ await fetchCategories();
 function createFilterButton({name, id}) {
   const bouton = document.createElement("button");
   bouton.innerHTML = `${name}`;
-  bouton.classList.add('filter_btn');
+  bouton.classList.add("filter_btn");
   bouton.addEventListener("click", () => fetchWorks(id)); // et pas categoryId ! envoie à fetchWorks
   bouton.addEventListener("click", (event) => switchFilter(event));
   document.querySelector(".all").addEventListener("click", (event) => switchFilter(event)); // fait en sorte que "tous" switch
@@ -80,7 +90,6 @@ function loggedIn() {
     filter.classList.add("hidden");
   }
 }
-
 loggedIn();
 
 document.querySelector(".navig-in").addEventListener("click", function logout () {

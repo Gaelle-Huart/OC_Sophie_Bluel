@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<!-- -- -- -- -- -- -- scripts JavaScript -- -- -- -- -- -- -->
 	<script type="module" src="./assets/script/index.js" defer></script>
+	<script src="./assets/script/modal.js" defer></script>
 </head>
 
 <body>
@@ -66,7 +67,7 @@
 
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section des modales -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- Galerie photo -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
-		<dialog id="modalGallery" class="modal_wrapper hidden" closedby="any" aria-hidden="true" aria-label="Modification de la galerie photo">
+		<dialog id="modalGallery" class="modal_wrapper hidden" aria-hidden="true" aria-label="Modifier la galerie photo">
 			<div class="modal">
 				<button class="modalGallery_close" aria-label="Fermer la modale">
 					<i class="fa-solid fa-xmark cross"></i>
@@ -75,13 +76,13 @@
 				<div class="modalGallery_gallery">
 					<!-- -- -- -- -- -- contenu généré par modal.js -- -- -- -- -- -->
 				</div>
-				<hr class="modalGallery_line"/>
-				<button class="modalGallery_btn">Ajouter une photo</button>
+				<hr class="line"/>
+				<button class="addWork_btn">Ajouter une photo</button>
 			</div>
 		</dialog>
 
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- Ajout photo -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
-		<dialog id="modalAdd" class="modal_wrapper" closedby="any" aria-hidden="true" aria-label="Ajouter/supprimer une photo">
+		<dialog id="modalAdd" class="modal_wrapper hidden" closedby="any" aria-hidden="true" aria-label="Ajouter une photo">
 			<div class="modal">
 				<div class="modalAdd_topIcons">
 					<button class="topIcons_back" aria-label="Précédent">
@@ -98,14 +99,14 @@
 						<label class="photo_label" for="file">+ Ajouter photo</label>
 						<p class="photo_info">jpg, png : 4mo max</p>
 						<input class="photo_input" type="file" name="image" id="file" accept="image/jpg, image/png" required>
-						<img id="photo_preview" src="#" alt="Aperçu de l'image">
+						<img id="photo_preview" class="hidden" src="#" alt="Aperçu de l'image">
 					</div>
-					<label class="form_label" for="title">Titre</label>
-					<input class="form_input" type="file" name="title" id="title" required>
-					<label class="form_label" for="selectCategory">Catégorie</label>				
-					<select class="selectCategory" name="Category" required></select>
-					<hr/>
-					<button type="submit" id="addWorkButton" disabled>Valider</button>
+					<label class="modForm_label" for="title">Titre</label>
+					<input class="form_input" type="text" name="title" id="title" required>
+					<label class="modForm_label" for="Category">Catégorie</label>				
+					<select class="selectCategory" name="Category" id="Category" required></select>
+					<hr class="line"/>
+					<button type="submit" class="submitWork_btn" disabled>Valider</button>
 				</form>
 			</div>
 		</dialog>
