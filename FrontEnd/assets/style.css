@@ -57,6 +57,11 @@ body {
 	font-size: 14px;
 }
 
+:is(a, button, input, textarea):focus {
+  outline: max(5px) solid #1D6154;
+  outline-offset: 5px;
+}
+
 .hidden {
 	display: none !important; /* <= pratique pour ce cas précis */
 }
@@ -124,17 +129,11 @@ header {
 }
 .navig {
 	padding: 0 21px;
-	font-size: 16px;
-	
-}
-.navig-in {
-	padding: 0 21px;
-	font-size: 16px;
-	margin: 0 7px;
-	
+	font-size: 16px;	
 }
 .navig-insta {
-	padding-left: 25px;
+	width: 22px;
+	height: 22px;
 }
 .insta {
 	cursor: pointer;
@@ -142,11 +141,9 @@ header {
 }
 .navig:hover {
 	font-weight: bold;
-	cursor: pointer;
 }
 .navig-in:hover {
 	font-weight: bold;
-	cursor: pointer;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * section introduction * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -274,23 +271,28 @@ header {
 }
 
 .modal {
-	display: flex;
+	display: none;
 	flex-direction: column;
 	width: 580px;
 	height: fit-content;
 	background-color: white;
 	border-radius: 10px;
 	padding: 25px;
+	border: 0;
+}
+.modal::backdrop {
+	background: rgba(0, 0, 0, 0.3);
 }
 
 .modalGallery_close {
+	display: flex;
 	align-self: end;
-	width: 24px;
-	height: 24px;
+	width: fit-content;
+	height: fit-content;
 	background-color: white;
 	border: none;
 	cursor: pointer;
-	margin-right: 5px;
+	/*margin-right: 5px;*/
 }
 
 .cross {

@@ -31,9 +31,9 @@
 			<ul class="navigation">
 				<li class="navig"><a class="link" href="#portfolio">projets</a></li>
 				<li class="navig"><a class="link" href="#contact">contact</a></li>
-				<li class="navig-in"><a class="link" href="./login.html">login</a></li>
+				<li class="navig"><a class="navig-in link" href="./login.html">login</a></li>
 				<!-- <li class="navig_out"><a class="link" href="./index.html">logout</a></li> --> <!-- pas besoin, gérer avec innerHTML -->
-				<li class="navig-insta"><i class="fa-brands fa-instagram insta"></i></li>
+				<li class="navig"><a class="navig-insta link" href="#"><i class="fa-brands fa-instagram insta"></i></a></li>
 			</ul>
 		</nav>
 	</header>
@@ -67,18 +67,29 @@
 
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section des modales -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- Galerie photo -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
-		<dialog id="modalGallery" class="modal_wrapper hidden" aria-hidden="true" aria-label="Modifier la galerie photo">
+		<!-- <dialog id="modalGallery" class="modal_wrapper" aria-hidden="true" aria-label="Modifier la galerie photo">
 			<div class="modal">
 				<button class="modalGallery_close" aria-label="Fermer la modale">
 					<i class="fa-solid fa-xmark cross"></i>
 				</button>
 				<h3 class="modalGallery_title">Galerie photo</h3>
-				<div class="modalGallery_gallery">
+				<div class="modalGallery_gallery"> -->
 					<!-- -- -- -- -- -- contenu généré par modal.js -- -- -- -- -- -->
-				</div>
+				<!-- </div>
 				<hr class="line"/>
 				<button class="addWork_btn">Ajouter une photo</button>
 			</div>
+		</dialog> -->
+		<dialog id="modalGallery" class="modal" aria-label="Modifier la galerie photo">
+			<button class="modalGallery_close" aria-label="Fermer la modale">
+				<i class="fa-solid fa-xmark modalGallery_close cross"></i>
+			</button>
+			<h3 class="modalGallery_title">Galerie photo</h3>
+			<div class="modalGallery_gallery">
+				<!-- -- -- -- -- -- contenu généré par modal.js -- -- -- -- -- -->
+			</div>
+			<hr class="line"/>
+			<button class="addWork_btn">Ajouter une photo</button>
 		</dialog>
 
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- Ajout photo -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
