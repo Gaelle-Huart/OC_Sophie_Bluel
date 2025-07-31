@@ -1,19 +1,19 @@
 /////// ///// ////
-///// ///// //// //// /// /// // // // Code dédié à la page d'accueil // // // /// /// //// //// ///// /////
+///// ///// //// //// /// /// // // // // // // Code dédié à la page d'accueil // // // // // // /// /// //// //// ///// /////
 /// ///// ////
 
-///// ///// //// //// /// /// // // // Récupération des projets // // // /// /// //// //// //// ///// /////
+///// ///// //// //// /// /// // // // // // // // Récupération des projets // // // // // /// /// //// //// //// ///// /////
 async function fetchWorks(filter = null) {
-  document.querySelector(".gallery").innerHTML = "";
-  document.querySelector(".modalGallery_gallery").innerHTML = "";
+  document.querySelector(".gallery").innerHTML = "";                                                           /// /// refresh de la galerie
+  document.querySelector(".miniGallery").innerHTML = "";
   try {   
-    const response = await fetch("http://localhost:5678/api/works");
+    const response = await fetch("http://localhost:5678/api/works");                                 /// /// appel à l'API pour récupération
     if(!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    const works = await response.json();
-    const filtering = filter ? works.filter((data) => data.categoryId === filter) : works; // (=>) = fonction anonyme
+    const works = await response.json();                                                                     /// /// retour converti en JSON
+    const filtering = filter ? works.filter((data) => data.categoryId === filter) : works;                   /// /// (=>) = fonction anonyme
     filtering.forEach(the => {
       createFigure(the.imageUrl, the.title);
       createModalFigure(the.imageUrl);
@@ -23,7 +23,7 @@ async function fetchWorks(filter = null) {
     console.log("Erreur :", erreur);
   }
 }
-await fetchWorks(null); // appel de fonction asynchrone
+await fetchWorks(null);                                                                                 /// /// appel de fonction asynchrone
 
 function createFigure(imageUrl, title) {
   const project = document.createElement("figure");
@@ -37,7 +37,7 @@ function createModalFigure(imageUrl, title, id) {
     <button class="trashCan_btn">
       <i id="${id}" class="fa-solid fa-trash-can"></i>
     </button>`;
-  document.querySelector(".modalGallery_gallery").appendChild(project);
+  document.querySelector(".miniGallery").appendChild(project);
 }
 
 ///// ///// //// //// /// /// // // // Récupération des catégories // // // // /// /// //// //// ///// /////
@@ -63,9 +63,9 @@ function createFilterButton({name, id}) {
   const bouton = document.createElement("button");
   bouton.innerHTML = `${name}`;
   bouton.classList.add("filter_btn");
-  bouton.addEventListener("click", () => fetchWorks(id)); // et pas categoryId ! envoie à fetchWorks
+  bouton.addEventListener("click", () => fetchWorks(id));                                    /// /// et pas categoryId ! envoie à fetchWorks
   bouton.addEventListener("click", (event) => switchFilter(event));
-  document.querySelector(".all").addEventListener("click", (event) => switchFilter(event)); // fait en sorte que "tous" switch
+  document.querySelector(".all").addEventListener("click", (event) => switchFilter(event));        /// /// fait en sorte que "tous" switch
   document.querySelector(".filter").append(bouton);
 }
 

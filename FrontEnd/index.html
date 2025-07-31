@@ -11,8 +11,9 @@
 	<meta name="description" content="">
 	<!-- -- -- -- -- -- -- FontAwesome -- -- -- -- -- -- -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- -- -- -- -- -- -- feuille de style CSS -- -- -- -- -- -- -->
 	<link rel="stylesheet" href="./assets/style.css">
-	<!-- -- -- -- -- -- -- scripts JavaScript -- -- -- -- -- -- -->
+	<!-- -- -- -- -- -- -- scripts de JavaScript -- -- -- -- -- -- -->
 	<script type="module" src="./assets/script/index.js" defer></script>
 	<script src="./assets/script/modal.js" defer></script>
 </head>
@@ -32,7 +33,6 @@
 				<li class="navig"><a class="link" href="#portfolio">projets</a></li>
 				<li class="navig"><a class="link" href="#contact">contact</a></li>
 				<li class="navig"><a class="navig-in link" href="./login.html">login</a></li>
-				<!-- <li class="navig_out"><a class="link" href="./index.html">logout</a></li> --> <!-- pas besoin, gérer avec innerHTML -->
 				<li class="navig"><a class="navig-insta link" href="#"><i class="fa-brands fa-instagram insta"></i></a></li>
 			</ul>
 		</nav>
@@ -48,7 +48,7 @@
 				<h2 class="work_title">Designer d'espace</h2>
 				<p class="work_text">Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 				<p class="work_text">Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-				<p class="work_text">En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+				<p class="work_text">En cas de besoin, une équipe pluridisciplinaire peut être constituée : architecte DPLG, décorateur(trice)</p>
 			</article>
 		</section>
 
@@ -67,57 +67,46 @@
 
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section des modales -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- Galerie photo -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
-		<!-- <dialog id="modalGallery" class="modal_wrapper" aria-hidden="true" aria-label="Modifier la galerie photo">
-			<div class="modal">
-				<button class="modalGallery_close" aria-label="Fermer la modale">
+		<dialog class="modal" id="modalGallery" aria-label="Modifier la galerie photo">
+			<div class="content">
+				<button class="closeGal" aria-label="Fermer la modale">
 					<i class="fa-solid fa-xmark cross"></i>
 				</button>
-				<h3 class="modalGallery_title">Galerie photo</h3>
-				<div class="modalGallery_gallery"> -->
+				<h3 class="title">Galerie photo</h3>
+				<div class="miniGallery">
 					<!-- -- -- -- -- -- contenu généré par modal.js -- -- -- -- -- -->
-				<!-- </div>
+				</div>
 				<hr class="line"/>
-				<button class="addWork_btn">Ajouter une photo</button>
+				<button class="addBtn">Ajouter une photo</button>
 			</div>
-		</dialog> -->
-		<dialog id="modalGallery" class="modal" aria-label="Modifier la galerie photo">
-			<button class="modalGallery_close" aria-label="Fermer la modale">
-				<i class="fa-solid fa-xmark modalGallery_close cross"></i>
-			</button>
-			<h3 class="modalGallery_title">Galerie photo</h3>
-			<div class="modalGallery_gallery">
-				<!-- -- -- -- -- -- contenu généré par modal.js -- -- -- -- -- -->
-			</div>
-			<hr class="line"/>
-			<button class="addWork_btn">Ajouter une photo</button>
 		</dialog>
 
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- Ajout photo -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
-		<dialog id="modalAdd" class="modal_wrapper hidden" closedby="any" aria-hidden="true" aria-label="Ajouter une photo">
-			<div class="modal">
-				<div class="modalAdd_topIcons">
-					<button class="topIcons_back" aria-label="Précédent">
+		<dialog id="modalAdd" class="modal" aria-label="Ajouter une photo">
+			<div class="content">
+				<div class="topIcons">
+					<button class="arrow" aria-label="Précédent">
 						<i class="fa-solid fa-arrow-left back"></i>
 					</button>
-					<button class="topIcons_cross" aria-label="Fermer la modale">
+					<button class="closeAdd" aria-label="Fermer la modale">
 						<i class="fa-solid fa-xmark cross"></i>
 					</button>
 				</div>
-				<h3 class="modalAdd_title">Ajout photo</h3>
-				<form action="#" method="post" class="modalAdd_form">
-					<div id="modalAdd_photo">
+				<h3 class="title">Ajout photo</h3>
+				<form action="#" method="post" class="modalForm" aria-label="Formulaire d'ajout photo">
+					<div id="addPhoto" class="addPhoto">
 						<i class="fa-regular fa-image imageIcon" aria-hidden="true"></i>
-						<label class="photo_label" for="file">+ Ajouter photo</label>
-						<p class="photo_info">jpg, png : 4mo max</p>
-						<input class="photo_input" type="file" name="image" id="file" accept="image/jpg, image/png" required>
-						<img id="photo_preview" class="hidden" src="#" alt="Aperçu de l'image">
+						<label class="photoLabel" for="file">+ Ajouter photo</label>
+						<p class="photoInfo">jpg, png : 4mo max</p>
+						<input class="photoInput" type="file" name="image" id="file" accept="image/jpg, image/png" required>
+						<img id="photoPreview" class="hidden" alt="Aperçu de l'image"> <!-- src dynamique -->
 					</div>
-					<label class="modForm_label" for="title">Titre</label>
-					<input class="form_input" type="text" name="title" id="title" required>
-					<label class="modForm_label" for="Category">Catégorie</label>				
-					<select class="selectCategory" name="Category" id="Category" required></select>
+					<label class="addLabel" for="title">Titre</label>
+					<input class="addInput" type="text" name="title" id="title" required>
+					<label class="addLabel" for="Category">Catégorie</label>
+					<select class="addSelect" name="Category" id="Category" required></select>
 					<hr class="line"/>
-					<button type="submit" class="submitWork_btn" disabled>Valider</button>
+					<button type="submit" formmethod="dialog" class="submitBtn" disabled>Valider</button>
 				</form>
 			</div>
 		</dialog>

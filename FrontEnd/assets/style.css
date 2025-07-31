@@ -57,9 +57,9 @@ body {
 	font-size: 14px;
 }
 
-:is(a, button, input, textarea):focus {
-  outline: max(5px) solid #1D6154;
-  outline-offset: 5px;
+:is(button, a, input, textarea, select):focus-visible {
+  outline: max(5px) solid #B1663C;
+  outline-offset: 4px;
 }
 
 .hidden {
@@ -213,7 +213,6 @@ header {
 	text-decoration: none;
 }
 
-
 /* * * * * * * * * * * * * * div filter * * * * * * * * * * * * * */
 .filter {
 	display: flex;
@@ -256,95 +255,84 @@ header {
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * boîte dialog Galerie * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-.modal_wrapper {
-	position: fixed;
-	top: 0;
-	left: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.3);
-	padding: 0;
-	border: none;
-}
-
 .modal {
-	display: none;
 	flex-direction: column;
-	width: 580px;
+	width: 630px;
 	height: fit-content;
 	background-color: white;
 	border-radius: 10px;
-	padding: 25px;
+	padding: 0;
 	border: 0;
-}
-.modal::backdrop {
-	background: rgba(0, 0, 0, 0.3);
-}
-
-.modalGallery_close {
-	display: flex;
-	align-self: end;
-	width: fit-content;
-	height: fit-content;
-	background-color: white;
-	border: none;
-	cursor: pointer;
-	/*margin-right: 5px;*/
-}
-
-.cross {
-	font-size: 20px;
-}
-
-.modalGallery_title {
-	font-size: 26px;
-	font-weight: 400;
-	align-self: center;
-	padding-top: 15px;
-}
-
-.modalGallery_gallery {
-	align-self: center;
-	width: 420px;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	grid-column-gap: 9px;
-	grid-row-gap: 28px;
-	padding: 50px 0;
-}
-.modalGallery_gallery figure {
-	position: relative;
-}
-.modalGallery_gallery img {
-	width: 100%;
-}
-
-.line {
-	align-self: center;
-	width: 420px;
-	background-color: #B3B3B3;
-	margin: 10px 0;
-}
-
-.addWork_btn {
-	align-self: center;
-	width: 237px;
-	height: 37px;
-	font-family: 'Syne';
-	font-size: 14px;
-	cursor: pointer;
-	border-radius: 60px;
-	color: white;
-	justify-content: center;
-	background-color: #1D6154;
-	border: none;
-	margin: 25px 0px 17px 0px;
-}
-.addWork_btn:hover {
-	background-color: #0E2F28;
+	&[open] {
+		display: flex;
+	}
+	&::backdrop {
+		background: rgba(0, 0, 0, 0.3);
+	}
+	.content {
+		display: flex;
+		flex-direction: column;
+		height: fit-content;
+		background-color: white;
+		border-radius: 10px;
+		padding: 25px;
+		.closeGal {
+			display: flex;
+			align-self: end;
+			width: fit-content;
+			height: fit-content;
+			background-color: white;
+			border: none;
+			cursor: pointer;
+			.cross {
+				font-size: 20px;
+			}
+		}
+		.title {
+			font-size: 26px;
+			font-weight: 400;
+			align-self: center;
+			padding-top: 15px;
+		}
+		.miniGallery {
+			align-self: center;
+			width: 420px;
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+			grid-column-gap: 9px;
+			grid-row-gap: 28px;
+			padding: 50px 0;
+			figure {
+				position: relative;
+			}
+			img {
+				width: 100%;
+			}
+		}
+		.line {
+		align-self: center;
+		width: 420px;
+		background-color: #B3B3B3;
+		margin: 10px 0;
+		}
+		.addBtn {
+		align-self: center;
+		width: 237px;
+		height: 37px;
+		font-family: 'Syne';
+		font-size: 14px;
+		cursor: pointer;
+		border-radius: 60px;
+		color: white;
+		justify-content: center;
+		background-color: #1D6154;
+		border: none;
+		margin: 25px 0px 17px 0px;
+			&:hover {
+				background-color: #0E2F28;
+			}
+		}
+	}
 }
 
 .trashCan_btn {
@@ -360,119 +348,125 @@ header {
 	background-color: black;
 	border-radius: 3px;
 	border: none;
-}
-.trashCan_btn i {
-	font-size: 10px;
-	color: white;
-	margin-top: 1px;
+	& i {
+		font-size: 10px;
+		color: white;
+		margin-top: 1px;
+	}
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * boîte dialog Ajout * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-.modalAdd_topIcons {
-	display: flex;
-	justify-content: space-between;
-}
-.topIcons_back {
-	width: 24px;
-	height: 24px;
-	background-color: white;
-	border: none;
-	cursor: pointer;
-}
-.topIcons_cross {
-	width: 24px;
-	height: 24px;
-	background-color: white;
-	border: none;
-	cursor: pointer;
-	margin-right: 5px;
-}
-.back {
-	font-size: 20px;
-}
-
-.modalAdd_title {
-	font-size: 26px;
-	font-weight: 400;
-	align-self: center;
-	padding-top: 15px;
-}
-
-.modalAdd_form {
-	width: 420px;
-	display: flex;
-	flex-direction: column;
-	margin: auto;
-}
-#modalAdd_photo {
-	width: 420px;
-	height: 169px;
-	display: flex;
-	flex-direction: column;
-	align-self: center;
-	background-color: #E8F1F6;
-	margin: 30px 0 10px 0;
-	border-radius: 3px;
-}
-.imageIcon {
-	color: #B9C5CC;
-	font-size: 68px;
-	align-self: center;
-	padding: 15px 0 10px 0;
-}
-.photo_label {
-	display: flex;
-	width: 173px;
-	height: 36px;
-	font-size: 14px;
-	font-weight: 600;
-	align-items: center;
-	justify-content: center;
-	line-height: 100%;
-	background-color: #CBD6DC;
-	color: #306685;
-	align-self: center;
-	border-radius: 60px;
-	cursor: pointer;
-}
-.photo_info {
-	font-size: 10px;
-	align-self: center;
-	margin-top: 10px;
-}
-.photo_input {
-	height: 20px;
-	opacity: 0;
-}
-.modForm_label {
-	margin: 1.5em 0 .7em 0;
-	line-height: normal;
-	font-size: 14px;
-	font-weight: 500;
-}
-.selectCategory {
-	height: 50px;
-	font-size: 14px;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-	appearance: menulist-button;
-	margin-bottom: 30px;
-}
-.submitWork_btn {
-	align-self: center;
-	width: 237px;
-	height: 37px;
-	font-family: 'Syne';
-	font-size: 14px;
-	cursor: pointer;
-	border-radius: 60px;
-	color: white;
-	background-color: #A7A7A7;
-	border: none;
-	margin: 15px 0px 17px 0px;
-}
-.submitWork_btn:hover {
-	background-color: #0E2F28;
+.modal {
+	.content {
+		.topIcons {
+			display: flex;
+			justify-content: space-between;
+			.arrow {
+				width: 24px;
+				height: 24px;
+				background-color: white;
+				border: none;
+				cursor: pointer;
+			}
+			.closeAdd {
+				display: flex;
+				align-self: end;
+				width: fit-content;
+				height: fit-content;
+				background-color: white;
+				border: none;
+				cursor: pointer;
+				.cross {
+					font-size: 20px;
+				}
+			}
+		}
+		.modalForm {
+			width: 420px;
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+			.addPhoto {
+				width: 420px;
+				height: 169px;
+				display: flex;
+				flex-direction: column;
+				align-self: center;
+				background-color: #E8F1F6;
+				margin: 30px 0 10px 0;
+				border-radius: 3px;
+				.imageIcon {
+					color: #B9C5CC;
+					font-size: 68px;
+					align-self: center;
+					padding: 15px 0 10px 0;
+				}
+				.photoLabel {
+					display: flex;
+					width: 173px;
+					height: 36px;
+					font-size: 14px;
+					font-weight: 600;
+					align-items: center;
+					justify-content: center;
+					line-height: 100%;
+					background-color: #CBD6DC;
+					color: #306685;
+					align-self: center;
+					border-radius: 60px;
+					cursor: pointer;
+				}
+				.photoInfo {
+					font-size: 10px;
+					align-self: center;
+					margin-top: 10px;
+				}
+				.photoInput {
+					height: 20px;
+					opacity: 0;
+				}
+				.photoPreview {
+					width: 100%;
+				}
+			}
+			.addLabel {
+				margin: 1.5em 0 .7em 0;
+				line-height: normal;
+				font-size: 14px;
+				font-weight: 500;
+			}
+			.addInput {
+				height: 51px;
+				font-size: 14px;
+				border: none;
+				box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+			}
+			.addSelect {
+				height: 50px;
+				font-size: 14px;
+				border: none;
+				box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+				appearance: menulist-button;
+				margin-bottom: 30px;
+			}
+			.submitBtn {
+				align-self: center;
+				width: 237px;
+				height: 37px;
+				font-family: 'Syne';
+				font-size: 14px;
+				cursor: pointer;
+				border-radius: 60px;
+				color: white;
+				background-color: #A7A7A7;
+				border: none;
+				margin: 15px 0px 17px 0px;
+				&:hover {
+					background-color: #0E2F28;
+				}
+			}
+		}
+	}
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * section contact * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
