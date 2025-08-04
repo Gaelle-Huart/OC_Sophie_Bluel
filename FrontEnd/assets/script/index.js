@@ -1,58 +1,73 @@
 /////// ///// ////
-///// ///// //// //// /// /// // // // // // // Code dédié à la page d'accueil // // // // // // /// /// //// //// ///// /////
+///// ///// //// //// /// /// // // // // // // // Code dédié à la page d'accueil // // // // // // // /// /// //// //// ///// /////
 /// ///// ////
 
-///// ///// //// //// /// /// // // // // // // // Récupération des projets // // // // // /// /// //// //// //// ///// /////
+const gallery = document.querySelector(".gallery");
+const miniGallery = document.querySelector(".miniGallery");
+///// ///// //// //// /// /// // // // // // // // // Récupération des projets // // // // // // /// /// //// //// //// ///// /////
 async function fetchWorks(filter = null) {
-  document.querySelector(".gallery").innerHTML = "";                                                           /// /// refresh de la galerie
-  document.querySelector(".miniGallery").innerHTML = "";
+  gallery.innerHTML = "";                                                                                       /// /// refresh de la galerie
+  miniGallery.innerHTML = "";
   try {   
-    const response = await fetch("http://localhost:5678/api/works");                                 /// /// appel à l'API pour récupération
-    if(!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
+    const returnAnswer = await fetch("http://localhost:5678/api/works");                              /// /// appel à l'API pour récupération
+    if(!returnAnswer.ok) {
+      throw new Error(`Returned answer status: ${returnAnswer.status}`);
     }
-
-    const works = await response.json();                                                                     /// /// retour converti en JSON
-    const filtering = filter ? works.filter((data) => data.categoryId === filter) : works;                   /// /// (=>) = fonction anonyme
+    const works = await returnAnswer.json();                                                                  /// /// retour converti en JSON
+    const filtering = filter ? works.filter((e) => e.categoryId === filter) : works;                     /// /// ( () => ) = fonction anonyme
     filtering.forEach(the => {
-      createFigure(the.imageUrl, the.title);
-      createModalFigure(the.imageUrl);
+      createFigure(the.imageUrl, the.title, the.id);
+      createModalFigure(the.imageUrl, the.title, the.id);
     });
-    
-  } catch (erreur) {
-    console.log("Erreur :", erreur);
+    const deleteBtn = document.querySelectorAll(".trashCan_btn");
+    deleteBtn.forEach((button) => {
+      button.getAttribute("data-id");
+      button.addEventListener("click", (e) => {
+        const id = e.currentTarget.dataset.id;
+        if (id) {
+          deleteProject(id);
+        } else {
+          console.error("Aucune ID trouvée.");
+        }
+      });
+    }); 
+  } catch (error) {
+    console.log("FetchWorks error :", error);
   }
 }
-await fetchWorks(null);                                                                                 /// /// appel de fonction asynchrone
+await fetchWorks();                                                                           /// /// await pour appel de fonction asynchrone
 
-function createFigure(imageUrl, title) {
+function createFigure(imageUrl, title, id) {
   const project = document.createElement("figure");
   project.innerHTML = `<img src="${imageUrl}" alt="${title}">
-    <figcaption>${title}</figcaption>`;
-  document.querySelector(".gallery").appendChild(project);
+    <figcaption">${title}</figcaption>`;
+  project.dataset.id = `${id}`;
+  project.dataset.identifiant = `projet-${id}`;
+  gallery.appendChild(project);
 }
 function createModalFigure(imageUrl, title, id) {
   const project = document.createElement("figure");
   project.innerHTML = `<img src="${imageUrl}" alt="${title}">
-    <button class="trashCan_btn">
-      <i id="${id}" class="fa-solid fa-trash-can"></i>
+    <button data-id="${id}" class="trashCan_btn">
+      <i class="fa-solid fa-trash-can"></i>
     </button>`;
-  document.querySelector(".miniGallery").appendChild(project);
+  project.dataset.identifiant = `miniprojet-${id}`;
+  miniGallery.appendChild(project);
 }
 
 ///// ///// //// //// /// /// // // // Récupération des catégories // // // // /// /// //// //// ///// /////
 async function fetchCategories() {
   try {
-    const response = await fetch("http://localhost:5678/api/categories");
-    if(!response.ok) {
-      throw new Error(`Response status: ${response.status}`)
+    const returnAnswer = await fetch("http://localhost:5678/api/categories");
+    if(!returnAnswer.ok) {
+      throw new Error(`Returned answer status: ${returnAnswer.status}`)
     }
-    const categories = await response.json();
+    const categories = await returnAnswer.json();
     for (let i = 0 ; i < categories.length ; i++) {
-      createFilterButton(categories[i], categories[i]);
+      createFilterButton(categories[i]);
     }
-  } catch (erreur){
-    console.log("Erreur :", erreur);
+  } catch (error){
+    console.log("FetchCategories error :", error);
   }
 }
 await fetchCategories();
@@ -63,9 +78,9 @@ function createFilterButton({name, id}) {
   const bouton = document.createElement("button");
   bouton.innerHTML = `${name}`;
   bouton.classList.add("filter_btn");
-  bouton.addEventListener("click", () => fetchWorks(id));                                    /// /// et pas categoryId ! envoie à fetchWorks
+  bouton.addEventListener("click", () => fetchWorks(id));
   bouton.addEventListener("click", (event) => switchFilter(event));
-  document.querySelector(".all").addEventListener("click", (event) => switchFilter(event));        /// /// fait en sorte que "tous" switch
+  document.querySelector(".all").addEventListener("click", (event) => switchFilter(event));
   document.querySelector(".filter").append(bouton);
 }
 
@@ -92,12 +107,17 @@ function loggedIn() {
 }
 loggedIn();
 
-document.querySelector(".navig-in").addEventListener("click", function logout () {
+document.querySelector(".navig-in").addEventListener("click", function logout() {
   if (sessionStorage.loginToken) {
+    window.location.href = "index.html";
     sessionStorage.removeItem("loginToken");
     window.location.reload();
   }
 });
 
-///// ///// //// //// /// /// // // // Gestion du bouton "tous" // // // /// /// //// //// //// //// ///// /////
+///// ///// //// //// /// /// // // // // // Gestion du bouton "tous" du filtre // // // // // /// /// //// //// //// //// ///// /////
 document.querySelector(".all").addEventListener("click", () => fetchWorks());
+
+///// ///// //// //// /// /// // // // // // Gestion de l'affichage des nouveaux travaux // // // // /// /// //// //// //// //// ///// /////
+gallery.addEventListener("change", fetchWorks);
+miniGallery.addEventListener("change", fetchWorks);

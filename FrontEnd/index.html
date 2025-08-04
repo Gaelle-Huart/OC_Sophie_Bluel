@@ -55,7 +55,8 @@
 		<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section portfolio -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
 		<section id="portfolio" class="portfolio">
 			<h2 class="portfolio_title">Mes projets
-				<a class="modify hidden" href="#modalGallery"><i class="modify_icon fa-regular fa-pen-to-square" aria-hidden="true"></i>modifier</a>
+				<a class="modify hidden" href="#modalGallery">
+					<i class="fa-regular fa-pen-to-square modify_icon" aria-hidden="true"></i>modifier</a>
 			</h2>
 			<div class="filter">
 				<button class="all filter_btn selected">Tous</button>
@@ -93,20 +94,20 @@
 					</button>
 				</div>
 				<h3 class="title">Ajout photo</h3>
-				<form action="#" method="post" class="modalForm" aria-label="Formulaire d'ajout photo">
+				<form id="addForm" method="post" class="modalForm" aria-label="Formulaire d'ajout photo">
 					<div id="addPhoto" class="addPhoto">
-						<i class="fa-regular fa-image imageIcon" aria-hidden="true"></i>
+						<i class="fa-regular fa-image photoIcon" aria-hidden="true"></i>
 						<label class="photoLabel" for="file">+ Ajouter photo</label>
 						<p class="photoInfo">jpg, png : 4mo max</p>
-						<input class="photoInput" type="file" name="image" id="file" accept="image/jpg, image/png" required>
+						<input class="photoInput hidden" type="file" name="image" id="file" accept="image/jpg, image/png" required>
 						<img id="photoPreview" class="hidden" alt="Aperçu de l'image"> <!-- src dynamique -->
 					</div>
 					<label class="addLabel" for="title">Titre</label>
 					<input class="addInput" type="text" name="title" id="title" required>
-					<label class="addLabel" for="Category">Catégorie</label>
-					<select class="addSelect" name="Category" id="Category" required></select>
+					<label class="addLabel" for="category">Catégorie</label>
+					<select class="addSelect" name="category" id="category" required></select>
 					<hr class="line"/>
-					<button type="submit" formmethod="dialog" class="submitBtn" disabled>Valider</button>
+					<button type="submit" formmethod="dialog" class="submitBtn grey" disabled>Valider</button>
 				</form>
 			</div>
 		</dialog>

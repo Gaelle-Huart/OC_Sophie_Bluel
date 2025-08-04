@@ -1,11 +1,11 @@
 /////// ///// ////
-///// ///// //// //// /// /// // // // // // // // Code dédié à la page login // // // /// /// /// //// //// //// ///// /////
+///// ///// //// //// /// /// // // // // // // // Code dédié à la page login // // // // // // /// /// /// //// //// //// ///// /////
 /// ///// ////
 
 async function sendLoginRequest() {
   const loginForm = document.querySelector(".login_form");
   loginForm.addEventListener("submit", async function (event) {
-    event.preventDefault(); // pas de rechargement
+    event.preventDefault();                                                                                       /// /// pas de rechargement
     
     const user = {
       email : document.getElementById("email").value,
@@ -21,14 +21,15 @@ async function sendLoginRequest() {
     if(!returnAnswer.ok) {
       let txtError = document.querySelector(".login_form .error");
       txtError = document.createElement("div");
-      txtError.innerHTML = "Email ou mot de passe incorrect.";
-      txtError.classList.add("error");
+      txtError.innerHTML = "Erreur dans l’identifiant ou le mot de passe.";
+      txtError.classList.add("notif");
       document.querySelector(".login_form").prepend(txtError);
     } else {
       let result = await returnAnswer.json();
 
       const token = result.token;
-      sessionStorage.setItem("loginToken", token);
+      sessionStorage.setItem("loginToken", token);                               /// /// stockage temporaire du token dans la session windows
+      console.log(token);
 
       window.location.href = "index.html";
     }
