@@ -6,7 +6,8 @@ let currentModal = null;
 ///// ///// //// //// /// /// // // // liste des constantes consacrées aux modales // // // /// /// //// //// ///// /////
 const modify = document.querySelector(".modify");                                             /// /// identifie le lien modifier du portfolio
 const gallery = document.querySelector(".gallery");                                                   /// /// identifie la galerie principale
-const modalGallery = document.getElementById("modalGallery");                                           /// /// identifie la modale (galerie)
+const miniGallery = document.querySelector(".miniGallery");                                         /// /// identifie la galerie de la modale
+const modalGal = document.getElementById("modalGallery");                                               /// /// identifie la modale (galerie)
 const modalAdd = document.getElementById("modalAdd");                                                     /// /// identifie la modale (ajout)
 const addWork =  document.querySelector(".addBtn");                                         /// /// identifie le bouton Ajout photo (galerie)
 const back = document.querySelector(".back");                                                     /// /// identifie la flèche arrière (ajout)
@@ -26,7 +27,7 @@ const loginToken = sessionStorage.getItem("loginToken");                        
 function openModal() {
   modify.addEventListener("click", (e) => {
     if (e.target === modify) {
-      currentModal = modalGallery;
+      currentModal = modalGal;
       currentModal.showModal();
       console.log("Modale galerie ouverte !"); // test //
     }
@@ -63,7 +64,7 @@ function backToGallery(e) {
   if (e.target === back) {
     resetAddForm();
     currentModal.close();
-    currentModal = modalGallery;
+    currentModal = modalGal;
     currentModal.showModal();
     console.log("Modale galerie ouverte !"); // test //
   }
@@ -177,7 +178,7 @@ function resetAddForm() {
   document.querySelector(".photoIcon").classList.remove("hidden");
   document.querySelector(".photoLabel").classList.remove("hidden");
   document.querySelector(".photoInfo").classList.remove("hidden");
-  allowFormSubmit()
+  allowFormSubmit();
 }
 
 ///// ///// //// //// /// /// // // // // Gestion du bouton "Valider" dans le formulaire d'ajout // // // /// /// //// //// ///// /////
@@ -207,12 +208,12 @@ function displayNewWorkInGalleries(addedWork) {
   newWork.innerHTML = `<img src=${addedWork.imageUrl} alt=${addedWork.title}>
     <figcaption>${addedWork.title}</figcaption>`;
   newWork.dataset.identifiant = `projet-${addedWork.id}`;
+  gallery.appendChild(newWork);
   const miniNewWork = document.createElement("figure");
   miniNewWork.innerHTML = `<img src="${addedWork.imageUrl}" alt="${addedWork.title}">
     <button data-id="${addedWork.id}" class="trashCan_btn">
       <i class="fa-solid fa-trash-can"></i>
     </button>`;
   miniNewWork.dataset.identifiant = `miniprojet-${addedWork.id}`;
-  gallery.appendChild(newWork);
-  modalGallery.appendChild(miniNewWork);
+  miniGallery.appendChild(miniNewWork);
 }

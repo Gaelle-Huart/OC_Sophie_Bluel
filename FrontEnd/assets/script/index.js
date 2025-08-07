@@ -19,9 +19,33 @@ async function fetchWorks(filter = null) {
       createFigure(the.imageUrl, the.title, the.id);
       createModalFigure(the.imageUrl, the.title, the.id);
     });
-    const deleteBtn = document.querySelectorAll(".trashCan_btn");
+  } catch (error) {
+    console.log("FetchWorks error :", error);
+  }
+}
+await fetchWorks();                                                                           /// /// await pour appel de fonction asynchrone
+
+///// ///// //// //// /// /// // // // // // // // // Création de figures pour galeries // // // // // // /// /// //// //// //// ///// /////
+function createFigure(imageUrl, title, id) {
+  const project = document.createElement("figure");
+  project.innerHTML = `<img src="${imageUrl}" alt="${title}">
+    <figcaption">${title}</figcaption>`;
+  project.dataset.id = `${id}`;
+  project.dataset.identifiant = `projet-${id}`;
+  gallery.appendChild(project);
+};
+function createModalFigure(imageUrl, title, id) {
+  if(sessionStorage.loginToken) {
+    const project = document.createElement("figure");
+    project.innerHTML = `<img src="${imageUrl}" alt="${title}">
+      <button data-id="${id}" class="trashCan_btn">
+        <i class="fa-solid fa-trash-can"></i>
+      </button>`;
+    project.dataset.identifiant = `miniprojet-${id}`;
+    miniGallery.appendChild(project);
+    const deleteBtn = document.querySelectorAll(".trashCan_btn");                       /// /// récupère les boutons de suppression (trash)
     deleteBtn.forEach((button) => {
-      button.getAttribute("data-id");
+      button.getAttribute("data-id");                                                        /// /// identifie l'id de chaque bouton/projet
       button.addEventListener("click", (e) => {
         const id = e.currentTarget.dataset.id;
         if (id) {
@@ -30,30 +54,9 @@ async function fetchWorks(filter = null) {
           console.error("Aucune ID trouvée.");
         }
       });
-    }); 
-  } catch (error) {
-    console.log("FetchWorks error :", error);
+    });
   }
-}
-await fetchWorks();                                                                           /// /// await pour appel de fonction asynchrone
-
-function createFigure(imageUrl, title, id) {
-  const project = document.createElement("figure");
-  project.innerHTML = `<img src="${imageUrl}" alt="${title}">
-    <figcaption">${title}</figcaption>`;
-  project.dataset.id = `${id}`;
-  project.dataset.identifiant = `projet-${id}`;
-  gallery.appendChild(project);
-}
-function createModalFigure(imageUrl, title, id) {
-  const project = document.createElement("figure");
-  project.innerHTML = `<img src="${imageUrl}" alt="${title}">
-    <button data-id="${id}" class="trashCan_btn">
-      <i class="fa-solid fa-trash-can"></i>
-    </button>`;
-  project.dataset.identifiant = `miniprojet-${id}`;
-  miniGallery.appendChild(project);
-}
+};
 
 ///// ///// //// //// /// /// // // // Récupération des catégories // // // // /// /// //// //// ///// /////
 async function fetchCategories() {
@@ -97,7 +100,7 @@ function loggedIn() {
   if(sessionStorage.loginToken) {
     const topband = document.querySelector(".edit_topband");
     topband.classList.remove("hidden");
-    document.querySelector("body").style.marginTop = '59px';
+    document.querySelector("body").classList.add("down");
     document.querySelector(".navig-in").innerText = "logout";
     const modify = document.querySelector(".modify");
     modify.classList.remove("hidden");
@@ -109,7 +112,6 @@ loggedIn();
 
 document.querySelector(".navig-in").addEventListener("click", function logout() {
   if (sessionStorage.loginToken) {
-    window.location.href = "index.html";
     sessionStorage.removeItem("loginToken");
     window.location.reload();
   }

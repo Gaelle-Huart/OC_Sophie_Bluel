@@ -56,6 +56,9 @@ body {
 	font-family: 'Work Sans';
 	font-size: 14px;
 }
+.down {
+	margin-top: 59px;
+}
 :is(button, a, input, textarea, select):focus-visible {
   outline: 3px solid #B1663C;
   outline-offset: 3px;
