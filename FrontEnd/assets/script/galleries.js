@@ -30,7 +30,7 @@ export async function fetchWorks(filter = null) {
 export function createFigure(imageUrl, title, id) {
   const project = document.createElement("figure");
   project.innerHTML = `<img src="${imageUrl}" alt="${title}">
-    <figcaption">${title}</figcaption>`;
+    <figcaption>${title}</figcaption>`;
   project.dataset.id = `${id}`;
   project.dataset.identifiant = `projet-${id}`;
   gallery.appendChild(project);

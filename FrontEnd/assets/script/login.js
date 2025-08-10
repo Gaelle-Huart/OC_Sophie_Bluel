@@ -30,7 +30,6 @@ async function sendLoginRequest() {
 
       const token = result.token;
       sessionStorage.setItem("loginToken", token);                               /// /// stockage temporaire du token dans la session windows
-      console.log(token);
 
       window.location.href = "index.html";
     }

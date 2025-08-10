@@ -27,15 +27,13 @@ function openModal() {
     if (e.target === modify) {
       currentModal = modalGal;
       currentModal.showModal();
-      console.log("Modale galerie ouverte !"); // test //
     }
   });
   addWork.addEventListener("click", (e) => {
-    if (e.target === document.querySelector(".addBtn")) {
+    if (e.target === addWork) {
       currentModal.close();
       currentModal = modalAdd;
       currentModal.showModal();
-      console.log("Modale d'ajout ouverte !"); // test //
     }
     back.addEventListener("click", backToGallery);
   });
@@ -54,7 +52,6 @@ function closeModal() {
 function noCloseInBox(e) {
   if(e.target === currentModal) {
     closeModal();
-    console.log("Modale fermée !") // test //
   }
 }
 
@@ -64,7 +61,6 @@ function backToGallery(e) {
     currentModal.close();
     currentModal = modalGal;
     currentModal.showModal();
-    console.log("Modale galerie ouverte !"); // test //
   }
 }
 
@@ -188,12 +184,10 @@ function allowFormSubmit() {
     submitWork.disabled = false;
     submitWork.classList.remove("grey");
     submitWork.classList.add("green");
-    console.log("Bouton du formulaire accessible.") // test //
   } else {
     submitWork.disabled = true;
     submitWork.classList.remove("green");
     submitWork.classList.add("grey");
-    console.log("Bouton désactivé : formulaire incomplet."); // test //
   }
 }
 submitTitle.addEventListener("input", allowFormSubmit);
