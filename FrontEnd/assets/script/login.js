@@ -3,6 +3,7 @@
 /// ///// ////
 
 async function sendLoginRequest() {
+  if(sessionStorage.loginToken) return;
   const loginForm = document.querySelector(".login_form");
   loginForm.addEventListener("submit", async function (event) {
     event.preventDefault();                                                                                       /// /// pas de rechargement
@@ -35,5 +36,18 @@ async function sendLoginRequest() {
     }
   });
 }
-
 sendLoginRequest();
+
+///// ///// //// //// /// /// // // // // // // // Gestion "login" et "logout" // // // // // // /// /// //// //// //// //// ///// /////
+export function loggedIn() {
+  if(sessionStorage.loginToken) {
+    const topband = document.querySelector(".edit_topband");
+    topband.classList.remove("hidden");
+    document.querySelector("body").classList.add("down");
+    document.querySelector(".navig-in").innerText = "logout";
+    const modify = document.querySelector(".modify");
+    modify.classList.remove("hidden");
+    const filter = document.querySelector(".filter");
+    filter.classList.add("hidden");
+  }
+}

@@ -14,7 +14,7 @@
 	<!-- -- -- -- -- -- -- feuille de style CSS -- -- -- -- -- -- -->
 	<link rel="stylesheet" href="./assets/style.css">
 	<!-- -- -- -- -- -- -- script de JavaScript -- -- -- -- -- -- -->
-	<script src="./assets/script/login.js" defer></script>
+	<script type="module" src="./assets/script/login.js" defer></script>
 </head>
 <body>
 	<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- section du header -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
@@ -39,7 +39,7 @@
 				<input class="login_form_input" type="email" name="email" id="email" required>
 				<label class="login_form_label" for="password">Mot de passe</label>
 				<input class="login_form_input" type="password" name="password" id="password" required>
-        <input class="login_form_submit" type="submit" value="Se connecter">
+        <input class="login_form_submit" type="submit" formmethod="post" value="Se connecter">
         <a class="forgot_password" href="#">Mot de passe oublié</a>
       </form>
     </section>

@@ -1,20 +1,18 @@
 /////// ///// ////
-///// ///// //// //// /// /// // // // // // // Code dédié à la modale // // // // // // /// /// //// //// ///// /////
+///// ///// //// //// /// /// // // // // // // // // // Code dédié à la modale // // // // // // // // // // /// /// //// //// ///// /////
 /// ///// ////
 
+import { createFigure, createModalFigure } from "./galleries.js";
+
 let currentModal = null;
-///// ///// //// //// /// /// // // // liste des constantes consacrées aux modales // // // /// /// //// //// ///// /////
+///// ///// //// //// /// /// // // // // // // liste des constantes consacrées aux modales // // // // // // /// /// //// //// ///// /////
 const modify = document.querySelector(".modify");                                             /// /// identifie le lien modifier du portfolio
-const gallery = document.querySelector(".gallery");                                                   /// /// identifie la galerie principale
-const miniGallery = document.querySelector(".miniGallery");                                         /// /// identifie la galerie de la modale
 const modalGal = document.getElementById("modalGallery");                                               /// /// identifie la modale (galerie)
 const modalAdd = document.getElementById("modalAdd");                                                     /// /// identifie la modale (ajout)
 const addWork =  document.querySelector(".addBtn");                                         /// /// identifie le bouton Ajout photo (galerie)
 const back = document.querySelector(".back");                                                     /// /// identifie la flèche arrière (ajout)
 const closeGal = document.querySelector(".closeGal");                                                    /// /// identifie la croix (galerie)
 const closeAdd = document.querySelector(".closeAdd");                                                      /// /// identifie la croix (ajout)
-const focusTargets = 'button, a, input, textarea, select';                                     /// /// détermine les éléments cibles du focus
-const deleteBtn = document.querySelectorAll(".trashCan_btn");                                    /// /// identifie les boutons de suppression
 const addForm = document.getElementById("addForm");                                         /// /// identifie le formulaire d'ajout de projet
 const photoPreview = document.getElementById("photoPreview");                                 /// /// identifie l'image pour l'aperçu (ajout)
 const submitTitle = document.getElementById("title");                                            /// /// identifie l'input du titre à ajouter
@@ -23,7 +21,7 @@ const submitFile = document.getElementById("file");                             
 const submitWork = document.querySelector(".submitBtn");                                          /// /// identifie le bouton Valider (ajout)
 const loginToken = sessionStorage.getItem("loginToken");                                 /// /// identifie l'utilisateur et ses autorisations
 
-///// ///// //// //// /// /// // // // // // // Ouverture et fermeture des deux modales // // // // // // /// /// //// //// ///// /////
+///// ///// //// //// /// /// // // // // // // // Ouverture et fermeture des deux modales // // // // // // // /// /// //// //// ///// /////
 function openModal() {
   modify.addEventListener("click", (e) => {
     if (e.target === modify) {
@@ -44,13 +42,13 @@ function openModal() {
   closeGal.addEventListener("click", closeModal);
   closeAdd.addEventListener("click", closeModal);
   document.addEventListener("click", noCloseInBox);
-};
+}
 openModal();
 
 function closeModal() {
   resetAddForm();
   currentModal?.close();
-};
+}
 
 ///// ///// //// //// /// /// // // // Gestion fermeture sur backdrop et retour arrière (ajout) // // // /// /// //// //// ///// /////
 function noCloseInBox(e) {
@@ -58,7 +56,7 @@ function noCloseInBox(e) {
     closeModal();
     console.log("Modale fermée !") // test //
   }
-};
+}
 
 function backToGallery(e) {
   if (e.target === back) {
@@ -68,10 +66,10 @@ function backToGallery(e) {
     currentModal.showModal();
     console.log("Modale galerie ouverte !"); // test //
   }
-};
+}
 
-///// ///// //// //// /// /// // // // Gestion de la supression de projets dans la modale "Galerie" // // // /// /// //// //// ///// /////
-async function deleteProject(id) {
+///// ///// //// //// /// /// // // // Gestion de la suppression de projets dans la modale "Galerie" // // // /// /// //// //// ///// /////
+export async function deleteProject(id) {
   try {
     const returnAnswer = await fetch(`http://localhost:5678/api/works/${id}`, {
       method: "DELETE",
@@ -98,12 +96,11 @@ async function deleteProject(id) {
   } catch (error) {
     console.error("Erreur de requête :", error);
   }
-  closeModal();
-};
+}
 
 ///// ///// //// //// /// /// // // // // Gestion de l'aperçu de l'image dans le formulaire d'ajout // // // /// /// //// //// ///// /////
 submitFile.addEventListener("change", () => {
-  let file = submitFile.files[0];                                                                                    /// /// fichier fourni
+  let file = submitFile.files[0];                                                                                      /// /// fichier fourni
   if (file) {
     const reader = new FileReader();                                                                               /// /// lecteur de fichier
     reader.onload = function (event) {
@@ -115,7 +112,7 @@ submitFile.addEventListener("change", () => {
     };
     reader.readAsDataURL(file);                                                                           /// /// Convertit le fichier en URL
   }
-});
+})
 
 ///// ///// //// //// /// /// // // // Gestion de la sélection de catégorie dans le formulaire d'ajout // // // /// /// //// //// ///// /////
 async function addCategoriesToSelect() {
@@ -158,7 +155,8 @@ addForm.addEventListener("submit", async (e) => {
     });
     if (returnAnswer.ok) { 
       const addedWork = await returnAnswer.json();
-      displayNewWorkInGalleries(addedWork);
+      createFigure(addedWork.imageUrl, addedWork.title, addedWork.id);
+      createModalFigure(addedWork.imageUrl, addedWork.title, addedWork.id);
       console.log("Nouveau projet ajouté :", addedWork);
     } else {
       alert("Erreur d'envoi : " + returnAnswer.status);
@@ -168,7 +166,7 @@ addForm.addEventListener("submit", async (e) => {
   }
   resetAddForm();
   closeModal();
-});
+})
 
 ///// ///// //// //// /// /// // // // // Gestion de la mise à zéro de la modale d'ajout photo // // // /// /// //// //// ///// /////
 function resetAddForm() {
@@ -201,19 +199,3 @@ function allowFormSubmit() {
 submitTitle.addEventListener("input", allowFormSubmit);
 submitCategory.addEventListener("change", allowFormSubmit);
 submitFile.addEventListener("change", allowFormSubmit);
-
-///// ///// //// //// /// /// // // // // Gestion de l'affichage immédiat du dernier projet ajouté // // // /// /// //// //// ///// /////
-function displayNewWorkInGalleries(addedWork) {
-  const newWork = document.createElement("figure");
-  newWork.innerHTML = `<img src=${addedWork.imageUrl} alt=${addedWork.title}>
-    <figcaption>${addedWork.title}</figcaption>`;
-  newWork.dataset.identifiant = `projet-${addedWork.id}`;
-  gallery.appendChild(newWork);
-  const miniNewWork = document.createElement("figure");
-  miniNewWork.innerHTML = `<img src="${addedWork.imageUrl}" alt="${addedWork.title}">
-    <button data-id="${addedWork.id}" class="trashCan_btn">
-      <i class="fa-solid fa-trash-can"></i>
-    </button>`;
-  miniNewWork.dataset.identifiant = `miniprojet-${addedWork.id}`;
-  miniGallery.appendChild(miniNewWork);
-}

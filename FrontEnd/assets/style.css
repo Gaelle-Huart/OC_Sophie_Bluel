@@ -178,6 +178,7 @@ header {
 		.work_text {
 			margin-bottom: 1.1em;
 			line-height: normal;
+			text-align: justify;
 		}
 	}
 }
